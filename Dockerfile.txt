@@ -1,0 +1,82 @@
+#!/bin/bash
+FROM ubuntu:latest
+sudo apt update
+
+sudo apt install -y apache2 mysql-server php libapache2-mod-php php-mysql
+
+MYSQL_ROOT_PASSWORD="S@iteja02"
+echo -e "mysql-server mysql-server/root_password password your_password_here\n\
+mysql-server mysql-server/root_password_again password your_password_here\n\
+\nY\nyour_password_here\nyour_password_here\nY\nY\nY\nY\nY\n\n" | sudo mysql_secure_installation
+
+sudo mysql -u root -p'S@i'
+
+CREATE DATABASE wordpress;
+
+CREATE USER 'teja'@'localhost' IDENTIFIED BY 'S@iteja02';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'teja'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+cd /var/www/html
+
+sudo wget https://wordpress.org/latest.tar.gz
+
+sudo tar -xzvf latest.tar.gz
+
+sudo cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
+
+sudo chown -R www-data:www-data /var/www/html/wordpress
+
+sudo a2ensite wordpress.conf
+
+sudo systemctl restart apache2
+
+cd /etc/apache2/sites-available
+sudo mv 000-default.conf ..
+
+sudo a2ensite wordpress.conf
+
+sudo systemctl restart apache2
+
+sudo apt install apache2 php libapache2-mod-php
+
+sudo apt install -y php-gd
+
+sudo apt install php-mysql
+
+sudo systemctl restart apache2  # For Apache
+
+sudo mkdir /var/www/html/aimtogoal
+
+sudo touch info.php /var/www/html/aimtogoal
+
+sudo a2enmod php8.1  # Use the appropriate PHP version
+
+sudo chmod 644 /var/www/html/aimtogoal/info.php
+
+sudo systemctl restart apache2
+
+sudo apt update
+sudo apt install -y php-fpm
+
+sudo systemctl enable php8.1-fpm
+sudo systemctl start php8.1-fpm
+
+sudo systemctl restart apache2
+
+sudo apt install libapache2-mod-php8.1
+
+sudo a2enmod proxy_fcgi setenvif
+sudo a2enconf php8.1-fpm  
+sudo systemctl restart apache2
+
+sudo a2ensite aimtogoal.conf
+
+sudo apache2ctl configtest
+
+sudo systemctl restart apache2
+
+sudo chown -R www-data:www-data /var/www/html/aimtogoal
+
+
