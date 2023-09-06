@@ -131,4 +131,20 @@ sudo chown -R www-data:www-data /var/www/html/aimtogoal
 manually
 sudo vim info.php
 <?php phpinfo(); ?>
+---------------------------------------------------------------
+
+after all this we wiil be creating a database in private subnet as it should not be available for the outside world.
+and connect it with the container in which the wordpress is running.
+
+To connect to the rds we use mysql -h your-rds-endpoint -u your-username -p.
+now we need to connect the container having wordpress with the rds 
+for that we nee to make some changes in the wp-config.php file
+
+define('DB_NAME', 'your_database_name');
+define('DB_USER', 'your_database_username');
+define('DB_PASSWORD', 'your_database_password');
+define('DB_HOST', 'your_rds_endpoint');
+
+these are the values to be changed there in the config.php file.
+after this the rds is perfectly connected with the container
 
