@@ -11,7 +11,8 @@ resource "aws_subnet" "dd_subnet"{
 	cidr_block = "10.0.1.0/24"
 	tags = {
 		Name = "subnet_dd"
-	       }	
+	       }
+	map_public_ip_on_launch = true
 	}
 resource "aws_internet_gateway" "dd_igw"{
 	vpc_id = aws_vpc.dd_vpc.id 
