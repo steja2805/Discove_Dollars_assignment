@@ -17,7 +17,7 @@ CREATE USER 'teja'@'localhost' IDENTIFIED BY 'S@iteja02';
 GRANT ALL PRIVILEGES ON wordpress.* TO 'teja'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
-# u will change the usernamr(wpuser) and password
+# you will change the usernamr(wpuser) and password
 
 cd /var/www/html
 
@@ -28,7 +28,7 @@ sudo tar -xzvf latest.tar.gz
 sudo cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
 
 cd wordpress
-modify the following manually
+/n modify the following manually
 
 define('DB_NAME', 'wordpress');
 define('DB_USER', 'teja');
