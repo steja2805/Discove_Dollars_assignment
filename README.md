@@ -28,7 +28,8 @@ sudo tar -xzvf latest.tar.gz
 sudo cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
 
 cd wordpress
-/n modify the following manually
+
+modify the following manually
 
 define('DB_NAME', 'wordpress');
 define('DB_USER', 'teja');
